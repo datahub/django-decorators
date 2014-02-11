@@ -1,4 +1,5 @@
 Copyright 2012 Julián Amaya M. [@julian_amaya](http://twitter.com/julian_amaya) <br />
+Additions by Allan James Vestal of the [Milwaukee Journal Sentinel](http://jsonline.com), Feb. 2014
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

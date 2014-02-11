@@ -40,10 +40,17 @@ def json_response(func):
         if isinstance(objects, HttpResponse):
             return objects
         try:
-            if isinstance(objects, QuerySet):
-                data = serializers.serialize("json", objects)
+            if 'spaceless' in request.REQUEST and request.REQUEST['spaceless'] == "true":
+                if isinstance(objects, QuerySet):
+                    data = serializers.serialize("json", objects)
+                else:
+                    data = simplejson.dumps(objects, cls=DjangoJSONEncoder)
             else:
-                data = simplejson.dumps(objects, cls=DjangoJSONEncoder)
+                if isinstance(objects, QuerySet):
+                    data = serializers.serialize("json", objects, indent=4)
+                else:
+                    data = simplejson.dumps(objects, cls=DjangoJSONEncoder, indent=4)
+
             if 'callback' in request.REQUEST:
                 # a jsonp response!
                 data = '%s(%s);' % (request.REQUEST['callback'], data)
